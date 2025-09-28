@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント満足度アンケート</title>
+    <style>
+        /* スタイルは簡略化しています */
+        body { font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        input[type="text"], textarea { width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box; }
+        input[type="range"] { width: 90%; display: block; margin: 10px auto; }
+        button { padding: 10px 20px; font-size: 1.1em; cursor: pointer; background-color: #3f6be4; color: white; border: none; border-radius: 5px; }
+        hr { margin: 30px 0; border: 0; border-top: 1px solid #ccc; }
+        .slider-control { margin-bottom: 25px; border: 1px solid #eee; padding: 15px; border-radius: 5px; }
+        .slider-label { display: flex; justify-content: space-between; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <form name="satisfaction_survey" netlify action="/success" method="POST">
+        
+        <h1>イベント満足度アンケート</h1>
+        
+        <div>
+            <h2>参加者情報</h2>
+            <label for="user-name">お名前:</label>
+            <input type="text" id="user-name" name="name" required>
+            
+            <label for="user-position">役職:</label>
+            <input type="text" id="user-position" name="position">
+        </div>
+
+        <hr>
+
+        <div>
+            <h2>イベント前後評価</h2>
+            
+            <div class="slider-control">
+                <label for="pre-satisfaction">イベント前の期待度:</label>
+                <input type="range" id="pre-satisfaction" name="pre_satisfaction" min="0" max="100" value="50" oninput="document.getElementById('pre-slider-value').textContent = this.value">
+                <p class="slider-label"><span>0 (低い)</span><span>期待値: <strong id="pre-slider-value">50</strong></span><span>100 (高い)</span></p>
+            </div>
+            
+            <div class="slider-control">
+                <label for="post-satisfaction">イベント後の満足度:</label>
+                <input type="range" id="post-satisfaction" name="post_satisfaction" min="0" max="100" value="50" oninput="document.getElementById('post-slider-value').textContent = this.value">
+                <p class="slider-label"><span>0 (不満)</span><span>満足度: <strong id="post-slider-value">50</strong></span><span>100 (最高)</span></p>
+            </div>
+
+            <label for="comment">ご意見・ご感想 (自由記述):</label>
+            <textarea id="comment" name="comment" rows="5"></textarea>
+        </div>
+
+        <hr>
+
+        <button type="submit">回答を送信</button>
+        
+    </form>
+
+    </body>
+</html>
